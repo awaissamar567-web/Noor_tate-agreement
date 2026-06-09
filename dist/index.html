@@ -166,8 +166,8 @@
                     <h2 class="section-title">Revenue Split <span class="text-gold-gradient">Calculator</span></h2>
                     <p class="section-desc">Estimate net revenue based on gross sales targets and processing fees, and see the interactive distribution breakdown instantly.</p>
                 </div>
-                <div class="calculator-wrapper glass-card" style="grid-template-columns: 1.3fr 1fr;">
-                    <div class="calc-inputs" style="gap: 1.5rem;">
+                <div class="calculator-wrapper glass-card">
+                    <div class="calc-inputs">
                         <!-- Followers Slider -->
                         <div class="input-group">
                             <div class="label-wrapper">
@@ -216,7 +216,7 @@
                             </div>
                         </div>
 
-                        <div class="calc-summary-metrics" style="grid-template-columns: 1fr; text-align: center; padding: 1rem;">
+                        <div class="calc-summary-metrics">
                             <div class="calc-sub-metric">
                                 <span class="sub-label">Expected Monthly Revenue</span>
                                 <span class="sub-val highlight" id="net-revenue-amount">$623.76</span>
@@ -263,53 +263,53 @@
                 </div>
 
                 <!-- Follower simulation panel -->
-                <div class="follower-simulation glass-card" style="margin-top: 2rem; padding: 2.5rem;">
-                    <h4 class="sim-title" id="sim-title" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: center;">Audience-Based Simulation (240K Followers @ 0.50% Engagement)</h4>
+                <div class="follower-simulation glass-card">
+                    <h4 class="sim-title" id="sim-title">Audience-Based Simulation (240K Followers @ 0.50% Engagement)</h4>
                     
-                    <div class="sim-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: center; margin-bottom: 2rem;">
-                        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
-                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Total Followers</span>
-                            <strong id="sim-followers" style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: #FFF;">240,000</strong>
+                    <div class="sim-stats">
+                        <div class="sim-stat-card">
+                            <span>Total Followers</span>
+                            <strong id="sim-followers">240,000</strong>
                         </div>
-                        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
-                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Engagement Rate</span>
-                            <strong style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: #FFF;">0.50%</strong>
+                        <div class="sim-stat-card">
+                            <span>Engagement Rate</span>
+                            <strong>0.50%</strong>
                         </div>
-                        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;">
-                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Engaged Audience Pool</span>
-                            <strong id="sim-engaged-pool" style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; color: var(--gold-primary); text-shadow: var(--gold-glow);">1,200</strong>
+                        <div class="sim-stat-card highlight">
+                            <span>Engaged Audience Pool</span>
+                            <strong id="sim-engaged-pool">1,200</strong>
                         </div>
                     </div>
                     
-                    <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                    <div class="scenario-grid">
                         <!-- Worst Case Scenario -->
-                        <div class="scenario-box worst-case" style="background: rgba(239, 68, 68, 0.02); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 1.75rem;">
-                            <div class="scenario-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid rgba(239, 68, 68, 0.1); padding-bottom: 0.75rem;">
-                                <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase;">Worst Case Scenario</span>
-                                <strong style="font-size: 0.95rem; color: #FFF;">1.5% Conversion</strong>
+                        <div class="scenario-box worst-case">
+                            <div class="scenario-header">
+                                <span class="badge">Worst Case Scenario</span>
+                                <strong>1.5% Conversion</strong>
                             </div>
-                            <div class="scenario-details" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
-                                <div style="display: flex; justify-content: space-between;"><span>Estimated Buyers:</span> <span id="sim-worst-buyers" style="font-weight: 600; color: #FFF;">18 sales</span></div>
-                                <div style="display: flex; justify-content: space-between;"><span>Monthly Gross Revenue (<span id="sim-worst-price-label">$25.99</span> price):</span> <span id="sim-worst-revenue" style="font-weight: 600; color: #FFF;">$467.82</span></div>
-                                <div style="display: flex; justify-content: space-between; border-top: 1px dashed rgba(255, 255, 255, 0.05); padding-top: 0.5rem; font-weight: 700;"><span>Creator Share (75%):</span> <span id="sim-worst-creator" class="text-gold-primary">$350.87</span></div>
-                                <div style="display: flex; justify-content: space-between; font-weight: 700;"><span>Operator Share (25%):</span> <span id="sim-worst-operator" style="color: #FFF;">$116.96</span></div>
+                            <div class="scenario-details">
+                                <div class="row-detail"><span>Estimated Buyers:</span> <span id="sim-worst-buyers" class="val-bold">18 sales</span></div>
+                                <div class="row-detail"><span>Monthly Gross Revenue (<span id="sim-worst-price-label">$25.99</span> price):</span> <span id="sim-worst-revenue" class="val-bold">$467.82</span></div>
+                                <div class="row-detail total-row"><span>Creator Share (75%):</span> <span id="sim-worst-creator" class="text-gold-primary">$350.87</span></div>
+                                <div class="row-detail total-row-secondary"><span>Operator Share (25%):</span> <span id="sim-worst-operator" class="val-bold">$116.96</span></div>
                             </div>
                         </div>
                         
                         <!-- Best Case Scenario (Target) -->
-                        <div class="scenario-box best-case active-target" style="background: rgba(212, 175, 55, 0.04); border: 2px solid var(--gold-primary); border-radius: 12px; padding: 1.75rem; position: relative; box-shadow: var(--gold-glow);">
-                            <div class="scenario-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 0.75rem;">
-                                <span class="badge" style="background: rgba(212, 175, 55, 0.2); color: var(--gold-light); border: 1px solid var(--gold-primary); font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase;">Best Case Scenario</span>
-                                <strong style="font-size: 0.95rem; color: #FFF;">15.0% Conversion</strong>
+                        <div class="scenario-box best-case active-target">
+                            <div class="scenario-header">
+                                <span class="badge">Best Case Scenario</span>
+                                <strong>15.0% Conversion</strong>
                             </div>
-                            <div class="scenario-details" style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
-                                <div style="display: flex; justify-content: space-between;"><span>Estimated Buyers:</span> <span id="sim-best-buyers" style="font-weight: 600; color: #FFF;">180 sales</span></div>
-                                <div style="display: flex; justify-content: space-between;"><span>Monthly Gross Revenue (<span id="sim-best-price-label">$25.99</span> price):</span> <span id="sim-best-revenue" style="font-weight: 600; color: #FFF;">$4,678.20</span></div>
-                                <div style="display: flex; justify-content: space-between; border-top: 1px dashed rgba(255, 255, 255, 0.05); padding-top: 0.5rem; font-weight: 700;"><span>Creator Share (75%):</span> <span id="sim-best-creator" class="text-gold-primary">$3,508.65</span></div>
-                                <div style="display: flex; justify-content: space-between; font-weight: 700;"><span>Operator Share (25%):</span> <span id="sim-best-operator" style="color: #FFF;">$1,169.55</span></div>
+                            <div class="scenario-details">
+                                <div class="row-detail"><span>Estimated Buyers:</span> <span id="sim-best-buyers" class="val-bold">180 sales</span></div>
+                                <div class="row-detail"><span>Monthly Gross Revenue (<span id="sim-best-price-label">$25.99</span> price):</span> <span id="sim-best-revenue" class="val-bold">$4,678.20</span></div>
+                                <div class="row-detail total-row"><span>Creator Share (75%):</span> <span id="sim-best-creator" class="text-gold-primary">$3,508.65</span></div>
+                                <div class="row-detail total-row-secondary"><span>Operator Share (25%):</span> <span id="sim-best-operator" class="val-bold">$1,169.55</span></div>
                             </div>
-                            <div class="target-callout" style="position: absolute; bottom: -12px; right: 20px; background: var(--gold-gradient); color: #000; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.75rem; border-radius: 20px; display: flex; align-items: center; gap: 0.4rem; box-shadow: var(--gold-glow);">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #000; display: inline-block;"></span>
+                            <div class="target-callout">
+                                <span></span>
                                 Target Focus: We aim for the Best Case Scenario!
                             </div>
                         </div>
