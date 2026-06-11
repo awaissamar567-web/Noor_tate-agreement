@@ -1832,3 +1832,37 @@ h1, h2, h3, h4, h5, h6 {
         height: 6px;
     }
 }
+
+/* Period Toggle Group styles */
+.period-toggle-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 0.35rem;
+    margin-top: 0.5rem;
+}
+.period-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.6rem 1rem;
+    border-radius: 16px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.period-btn:hover {
+    color: #FFF;
+    background: rgba(255, 255, 255, 0.03);
+}
+.period-btn.active {
+    background: var(--gold-gradient);
+    color: #000;
+    font-weight: 700;
+    box-shadow: var(--gold-glow);
+}

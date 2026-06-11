@@ -126,9 +126,9 @@
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                             </svg>
                         </div>
-                        <h3 class="metric-value text-gold-gradient">75% / 25%</h3>
+                        <h3 class="metric-value text-gold-gradient" style="font-size: 1.5rem;">75%/25% → 85%/15%</h3>
                         <p class="metric-title">Revenue Split</p>
-                        <p class="metric-desc">Creator receives 75% and Operator receives 25% of net revenues after platform fees.</p>
+                        <p class="metric-desc">Split is 75/25 for the first 6 months, then scales to 85% Creator / 15% Operator thereafter.</p>
                     </div>
 
                     <div class="metric-card glass-card">
@@ -216,6 +216,18 @@
                             </div>
                         </div>
 
+                        <!-- Period Selector -->
+                        <div class="input-group">
+                            <div class="label-wrapper">
+                                <label>Contract Period / Split Rate</label>
+                                <span class="input-display" id="period-display" style="font-size: 1rem;">Months 1-6 (25% Op)</span>
+                            </div>
+                            <div class="period-toggle-group">
+                                <button type="button" class="period-btn active" id="btn-period-first" data-operator-split="25">Months 1-6 (25% Op)</button>
+                                <button type="button" class="period-btn" id="btn-period-later" data-operator-split="15">Months 7+ (15% Op)</button>
+                            </div>
+                        </div>
+
                         <div class="calc-summary-metrics">
                             <div class="calc-sub-metric">
                                 <span class="sub-label">Expected Monthly Revenue</span>
@@ -291,8 +303,8 @@
                             <div class="scenario-details">
                                 <div class="row-detail"><span>Estimated Buyers:</span> <span id="sim-worst-buyers" class="val-bold">18 sales</span></div>
                                 <div class="row-detail"><span>Monthly Gross Revenue (<span id="sim-worst-price-label">$25.99</span> price):</span> <span id="sim-worst-revenue" class="val-bold">$467.82</span></div>
-                                <div class="row-detail total-row"><span>Creator Share (75%):</span> <span id="sim-worst-creator" class="text-gold-primary">$350.87</span></div>
-                                <div class="row-detail total-row-secondary"><span>Operator Share (25%):</span> <span id="sim-worst-operator" class="val-bold">$116.96</span></div>
+                                <div class="row-detail total-row"><span class="sim-creator-label">Creator Share (75%):</span> <span id="sim-worst-creator" class="text-gold-primary">$350.87</span></div>
+                                <div class="row-detail total-row-secondary"><span class="sim-operator-label">Operator Share (25%):</span> <span id="sim-worst-operator" class="val-bold">$116.96</span></div>
                             </div>
                         </div>
                         
@@ -305,8 +317,8 @@
                             <div class="scenario-details">
                                 <div class="row-detail"><span>Estimated Buyers:</span> <span id="sim-best-buyers" class="val-bold">180 sales</span></div>
                                 <div class="row-detail"><span>Monthly Gross Revenue (<span id="sim-best-price-label">$25.99</span> price):</span> <span id="sim-best-revenue" class="val-bold">$4,678.20</span></div>
-                                <div class="row-detail total-row"><span>Creator Share (75%):</span> <span id="sim-best-creator" class="text-gold-primary">$3,508.65</span></div>
-                                <div class="row-detail total-row-secondary"><span>Operator Share (25%):</span> <span id="sim-best-operator" class="val-bold">$1,169.55</span></div>
+                                <div class="row-detail total-row"><span class="sim-creator-label">Creator Share (75%):</span> <span id="sim-best-creator" class="text-gold-primary">$3,508.65</span></div>
+                                <div class="row-detail total-row-secondary"><span class="sim-operator-label">Operator Share (25%):</span> <span id="sim-best-operator" class="val-bold">$1,169.55</span></div>
                             </div>
                             <div class="target-callout">
                                 <span></span>
@@ -604,6 +616,27 @@
                 </div>
 
                 <div class="clauses-accordion">
+                    <!-- Clause 05 -->
+                    <div class="accordion-item glass-card">
+                        <button class="accordion-trigger">
+                            <span class="clause-num">05</span>
+                            <span class="clause-title">Revenue Split Structure</span>
+                            <span class="accordion-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>The net revenue generated from the co-created products shall be distributed in phases as follows:</p>
+                                <ul style="margin: 0.75rem 0; padding-left: 1.2rem;">
+                                    <li><strong>Months 1 to 6 (Initial Period):</strong> 75% to the Creator and 25% to the Operator.</li>
+                                    <li><strong>Month 7 and beyond (Standard Period):</strong> 85% to the Creator and 15% to the Operator.</li>
+                                </ul>
+                                <p style="font-size: 0.8rem; color: var(--text-dim);">* Net revenue is calculated as gross sales minus platform processing fees (e.g. Stripe, Whop, Gumroad) only, with no deductions for development or operational costs.</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="accordion-item glass-card">
                         <button class="accordion-trigger">
                             <span class="clause-num">06</span>
@@ -648,7 +681,7 @@
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-content-inner">
-                                <p>Either party may terminate this collaboration agreement immediately if the specified responsibilities are not met or are persistently delayed without reasonable cause. In the event of termination, any net revenue earned from sales generated prior to the official termination date shall still be split in accordance with the agreed-upon rates (75% Creator / 25% Operator).</p>
+                                <p>Either party may terminate this collaboration agreement immediately if the specified responsibilities are not met or are persistently delayed without reasonable cause. In the event of termination, any net revenue earned from sales generated prior to the official termination date shall still be split in accordance with the agreed-upon rates active at that time (75% Creator / 25% Operator during the first 6 months, and 85% Creator / 15% Operator thereafter).</p>
                             </div>
                         </div>
                     </div>
@@ -757,9 +790,12 @@
                     <span class="r-label">Creator:</span>
                     <span class="r-val" id="modal-cr-name">Noor</span>
                 </div>
-                <div class="receipt-row">
+                <div class="receipt-row" style="align-items: flex-start;">
                     <span class="r-label">Split Ratio:</span>
-                    <span class="r-val text-success">75% Creator / 25% Operator</span>
+                    <span class="r-val text-success" style="text-align: right; line-height: 1.4;">
+                        75% Creator / 25% Operator (Months 1-6)<br>
+                        85% Creator / 15% Operator (Months 7+)
+                    </span>
                 </div>
                 <div class="receipt-row">
                     <span class="r-label">Product Suite:</span>

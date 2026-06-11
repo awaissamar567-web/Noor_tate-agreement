@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const creatorShareDisplay = document.getElementById('creator-share-val');
     const operatorShareDisplay = document.getElementById('operator-share-val');
 
+    // Period buttons & display
+    const btnPeriodFirst = document.getElementById('btn-period-first');
+    const btnPeriodLater = document.getElementById('btn-period-later');
+    const periodDisplay = document.getElementById('period-display');
+    let operatorSplitRate = 0.25; // Default is first 6 months (25%)
+
     // Followers simulation elements
     const simTitle = document.getElementById('sim-title');
     const simFollowers = document.getElementById('sim-followers');
@@ -71,8 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const grossMonthly = buyers * price;
         const netRevenue = grossMonthly; // Platform fees removed!
         
-        const creatorShare = netRevenue * 0.75;
-        const operatorShare = netRevenue * 0.25;
+        const creatorSplitRate = 1 - operatorSplitRate;
+        const creatorShare = netRevenue * creatorSplitRate;
+        const operatorShare = netRevenue * operatorSplitRate;
 
         // Display updates
         followersDisplay.textContent = new Intl.NumberFormat('en-US').format(followers);
@@ -82,6 +89,25 @@ document.addEventListener('DOMContentLoaded', () => {
         netRevenueDisplay.textContent = formatCurrency(netRevenue);
         creatorShareDisplay.textContent = formatCurrency(creatorShare);
         operatorShareDisplay.textContent = formatCurrency(operatorShare);
+
+        // Update bar widths and percentages
+        const creatorBar = document.getElementById('creator-bar');
+        const operatorBar = document.getElementById('operator-bar');
+        if (creatorBar && operatorBar) {
+            creatorBar.style.width = `${creatorSplitRate * 100}%`;
+            operatorBar.style.width = `${operatorSplitRate * 100}%`;
+            
+            const creatorPercentText = creatorBar.querySelector('.bar-percent');
+            const operatorPercentText = operatorBar.querySelector('.bar-percent');
+            if (creatorPercentText) creatorPercentText.textContent = `${Math.round(creatorSplitRate * 100)}%`;
+            if (operatorPercentText) operatorPercentText.textContent = `${Math.round(operatorSplitRate * 100)}%`;
+        }
+
+        // Update role text in cards
+        const creatorRoleText = document.querySelector('.creator-share .share-role');
+        const operatorRoleText = document.querySelector('.operator-share .share-role');
+        if (creatorRoleText) creatorRoleText.textContent = `Creator @nooor_tate (${Math.round(creatorSplitRate * 100)}%)`;
+        if (operatorRoleText) operatorRoleText.textContent = `Operator Partner (${Math.round(operatorSplitRate * 100)}%)`;
 
         // Simulation panel dynamic updates
         if (simTitle) {
@@ -94,11 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
             simEngagedPool.textContent = new Intl.NumberFormat('en-US').format(engagedPool);
         }
         
+        // Update scenario card labels
+        const simCreatorLabels = document.querySelectorAll('.sim-creator-label');
+        const simOperatorLabels = document.querySelectorAll('.sim-operator-label');
+        simCreatorLabels.forEach(label => label.textContent = `Creator Share (${Math.round(creatorSplitRate * 100)}%):`);
+        simOperatorLabels.forEach(label => label.textContent = `Operator Share (${Math.round(operatorSplitRate * 100)}%):`);
+
         // Worst Case Scenario calculations (1.5% conversion)
         const worstBuyers = Math.round(engagedPool * 0.015);
         const worstRevenue = worstBuyers * price;
-        const worstCreatorShare = worstRevenue * 0.75;
-        const worstOperatorShare = worstRevenue * 0.25;
+        const worstCreatorShare = worstRevenue * creatorSplitRate;
+        const worstOperatorShare = worstRevenue * operatorSplitRate;
         
         if (simWorstBuyers) simWorstBuyers.textContent = `${worstBuyers} sales`;
         if (simWorstPriceLabel) simWorstPriceLabel.textContent = `$${price.toFixed(2)}`;
@@ -109,8 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Best Case Scenario calculations (15% conversion)
         const bestBuyers = Math.round(engagedPool * 0.15);
         const bestRevenue = bestBuyers * price;
-        const bestCreatorShare = bestRevenue * 0.75;
-        const bestOperatorShare = bestRevenue * 0.25;
+        const bestCreatorShare = bestRevenue * creatorSplitRate;
+        const bestOperatorShare = bestRevenue * operatorSplitRate;
         
         if (simBestBuyers) simBestBuyers.textContent = `${bestBuyers} sales`;
         if (simBestPriceLabel) simBestPriceLabel.textContent = `$${price.toFixed(2)}`;
@@ -123,10 +155,27 @@ document.addEventListener('DOMContentLoaded', () => {
         followersSlider.addEventListener('input', calculateRevenue);
         conversionSlider.addEventListener('input', calculateRevenue);
         priceSlider.addEventListener('input', calculateRevenue);
-        
-        // Run initial calculation
-        calculateRevenue();
     }
+
+    if (btnPeriodFirst && btnPeriodLater) {
+        btnPeriodFirst.addEventListener('click', () => {
+            btnPeriodFirst.classList.add('active');
+            btnPeriodLater.classList.remove('active');
+            if (periodDisplay) periodDisplay.textContent = 'Months 1-6 (25% Op)';
+            operatorSplitRate = 0.25;
+            calculateRevenue();
+        });
+        btnPeriodLater.addEventListener('click', () => {
+            btnPeriodLater.classList.add('active');
+            btnPeriodFirst.classList.remove('active');
+            if (periodDisplay) periodDisplay.textContent = 'Months 7+ (15% Op)';
+            operatorSplitRate = 0.15;
+            calculateRevenue();
+        });
+    }
+
+    // Run initial calculation
+    calculateRevenue();
 
     // 3. Responsibilities Checklist & Readiness Score
     const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -455,8 +504,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.font = '14px Arial, sans-serif';
             ctx.fillText('Split Ratio:', 60, 230);
             ctx.fillStyle = '#10B981';
-            ctx.font = 'bold 14px Arial, sans-serif';
-            ctx.fillText('75% Creator / 25% Operator', 220, 230);
+            ctx.font = 'bold 13px Arial, sans-serif';
+            ctx.fillText('75% Cr / 25% Op (First 6 Mos)', 220, 220);
+            ctx.fillText('85% Cr / 15% Op (Months 7+)', 220, 240);
             
             ctx.fillStyle = '#9CA3AF';
             ctx.font = '14px Arial, sans-serif';
